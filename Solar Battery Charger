@@ -1,0 +1,67 @@
+
+import java.util.Scanner;
+
+public class SolarBatteryCharger {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        double solarVoltage;
+        double solarCurrent;
+        double batteryPercentage;
+        double chargingPower;
+
+        System.out.println("======================================");
+        System.out.println("       SOLAR BATTERY CHARGER");
+        System.out.println("======================================");
+
+        System.out.print("Enter Solar Panel Voltage (V): ");
+        solarVoltage = sc.nextDouble();
+
+        System.out.print("Enter Solar Panel Current (A): ");
+        solarCurrent = sc.nextDouble();
+
+        System.out.print("Enter Battery Charge Level (%): ");
+        batteryPercentage = sc.nextDouble();
+
+        // Validate inputs
+        if (solarVoltage < 0 || solarCurrent < 0 ||
+            batteryPercentage < 0 || batteryPercentage > 100) {
+
+            System.out.println("Invalid input values!");
+            sc.close();
+            return;
+        }
+
+        // Calculate solar power
+        chargingPower = solarVoltage * solarCurrent;
+
+        System.out.println("\n======================================");
+        System.out.println("         CHARGING INFORMATION");
+        System.out.println("======================================");
+
+        System.out.printf("Solar Voltage       : %.2f V%n", solarVoltage);
+        System.out.printf("Solar Current       : %.2f A%n", solarCurrent);
+        System.out.printf("Solar Power         : %.2f W%n", chargingPower);
+        System.out.printf("Battery Charge Level: %.2f%%%n",
+                          batteryPercentage);
+
+        // Simulated charging decision
+        if (solarVoltage < 5 || solarCurrent <= 0) {
+            System.out.println("Charger Status      : INSUFFICIENT SOLAR INPUT");
+        }
+        else if (batteryPercentage >= 100) {
+            System.out.println("Charger Status      : BATTERY FULL");
+            System.out.println("Charging            : OFF");
+        }
+        else {
+            System.out.println("Charger Status      : SOLAR INPUT AVAILABLE");
+            System.out.println("Charging            : ON (SIMULATED)");
+        }
+
+        System.out.println("======================================");
+
+        sc.close();
+    }
+}
